@@ -2,11 +2,102 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Virtuelle Uni-Tour</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus-Kompass EAH – Virtuelle Uni-Tour</title>
+  <meta name="description" content="Lauf im Browser durch den WI-Bereich der EAH Jena und frag den Wegweiser nach jedem Raum.">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Virtuelle Uni-Tour</h1>
-  <p>Hier entsteht die Website.</p>
+
+  <!-- Kopfzeile: Logo links, Sprachwechsel rechts -->
+  <header class="kopfzeile">
+    <div class="container kopfzeile__inhalt">
+      <a href="index.html" class="logo">
+        <!-- Platzhalter-Zeichen, Logo-Bezug noch mit Prof. Stepping klären -->
+        <svg class="logo__zeichen" viewBox="0 0 28 24" aria-hidden="true">
+          <path d="M14 0 28 24H0Z" fill="currentColor"/>
+        </svg>
+        <span>Campus-Kompass EAH</span>
+      </a>
+      <a href="#" class="sprache" lang="en" aria-label="Switch to English">EN</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero: Überschrift, kurzer Text, zwei Buttons, Vorschaubild -->
+    <section class="hero">
+      <div class="container hero__raster">
+        <div class="hero__text">
+          <p class="label">EAH Jena · Wirtschaftsingenieurwesen</p>
+          <h1>Dein Weg durch die EAH, schon vor dem ersten Tag.</h1>
+          <p class="hero__unterzeile">Lauf im Browser durch den WI-Bereich und frag den Wegweiser nach jedem Raum.</p>
+          <div class="knopfreihe">
+            <a href="laden.html" class="knopf knopf--primaer">Tour starten</a>
+            <a href="#so-gehts" class="knopf knopf--sekundaer">So funktioniert's</a>
+          </div>
+        </div>
+        <div class="hero__bild platzhalter">
+          <p>Bild / Vorschau der Tour<br>(eigenes Foto, kein Lageplan)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- So funktioniert's: drei Schritte als nummerierte Liste -->
+    <section id="so-gehts" class="abschnitt">
+      <div class="container">
+        <h2>So funktioniert's</h2>
+        <ol class="schritte">
+          <li class="karte schritt">
+            <span class="schritt__nr" aria-hidden="true">1</span>
+            <div>
+              <h3>Tour öffnen</h3>
+              <p>Die 3D-Umgebung lädt direkt im Browser, ohne App.</p>
+            </div>
+          </li>
+          <li class="karte schritt">
+            <span class="schritt__nr" aria-hidden="true">2</span>
+            <div>
+              <h3>Frage stellen</h3>
+              <p>Schreib dem Avatar, wohin du willst.</p>
+            </div>
+          </li>
+          <li class="karte schritt">
+            <span class="schritt__nr" aria-hidden="true">3</span>
+            <div>
+              <h3>Route folgen</h3>
+              <p>Der Weg wird dir in der 3D-Ansicht angezeigt.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Beispielfragen als Chips -->
+    <section class="abschnitt abschnitt--grau">
+      <div class="container">
+        <h2>Probier zum Beispiel</h2>
+        <ul class="chips">
+          <li><a href="tour.html" class="chip">Wo ist Raum 3.3.42?</a></li>
+          <li><a href="tour.html" class="chip">Wo ist das Sekretariat?</a></li>
+          <li><a href="tour.html" class="chip">Wo sind die Toiletten?</a></li>
+          <li><a href="tour.html" class="chip">Gibt es einen Aufzug?</a></li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Fußzeile -->
+  <footer class="fusszeile">
+    <div class="container fusszeile__inhalt">
+      <p>Studentisches Projekt · TWP WS 2026/27 · EAH Jena</p>
+      <nav class="fusszeile__links" aria-label="Rechtliches">
+        <a href="#">Credits</a>
+        <a href="#">Impressum &amp; Datenschutz</a>
+      </nav>
+    </div>
+  </footer>
+
 </body>
 </html>

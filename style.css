@@ -1,0 +1,681 @@
+/* =========================================================
+   Campus-Kompass EAH – Stylesheet
+   Stand 26.10.2026 · Werte 1:1 aus dem Figma-Styleguide (22.10.2026)
+   Aufbau:
+   1. Variablen (Design-Tokens)
+   2. Grundlagen / Reset
+   3. Schrift-Stile
+   4. Layout
+   5. Komponenten (Knopf, Chip, Karte, Avatar, Platzhalter)
+   6. Startseite (index.html)
+   7. Ladebildschirm (laden.html)
+   8. Tour-Ansicht (tour.html)
+   9. Größere Bildschirme (Desktop) & Barrierefreiheit
+   ========================================================= */
+
+
+/* ---------- 1. Variablen (Design-Tokens) ---------- */
+:root {
+  /* Farben – jede Farbe hat eine feste Aufgabe */
+  --c-primary: #00727D;       /* Petrol: Buttons, Links, Akzente */
+  --c-primary-dark: #00535B;  /* Hover, Ladebildschirm */
+  --c-ink: #14202B;           /* Nachtblau: Haupttext, dunkle Flächen */
+  --c-ink-soft: #5A6672;      /* Nebentext */
+  --c-bg: #FFFFFF;            /* Seitenhintergrund */
+  --c-bg-mint: #E3F3F4;       /* Karten, Avatar-Kreis */
+  --c-bg-grey: #EEF2F5;       /* Bot-Blasen, Sektionen */
+  --c-accent: #F2B33D;        /* Wegweiser-Gelb: Route, Fokus – nie als Textfarbe */
+  --c-coral: #E85D75;         /* Ziel-Pin, kleine Akzente */
+  --c-line: #DDE3E8;          /* Rahmen, Trennlinien */
+  --c-avatar: #14A3A3;        /* Körperfarbe Avatar */
+
+  /* Abstände – nur diese Stufen verwenden */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+
+  /* Radien */
+  --r-klein: 6px;
+  --r-mittel: 14px;
+  --r-gross: 20px;
+  --r-rund: 999px;
+
+  /* Schrift: Inter, bis sie lokal eingebunden ist greift die Systemschrift */
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* Sonstiges */
+  --max-breite: 1120px;  /* maximale Inhaltsbreite am Desktop */
+  --touch: 48px;         /* Mindesthöhe für Touch-Ziele */
+}
+
+
+/* ---------- 2. Grundlagen / Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box; /* Breite enthält Innenabstand und Rahmen */
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--c-ink);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p {
+  margin: 0;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--c-primary);
+}
+
+/* Gut sichtbarer Fokus-Rahmen für Tastatur-Nutzer */
+:focus-visible {
+  outline: 3px solid var(--c-accent);
+  outline-offset: 2px;
+}
+
+/* Text nur für Screenreader, optisch versteckt */
+.nur-screenreader {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+
+/* ---------- 3. Schrift-Stile ---------- */
+h1 { font-size: 32px; line-height: 1.15; font-weight: 700; }
+h2 { font-size: 24px; line-height: 1.25; font-weight: 700; }
+h3 { font-size: 18px; line-height: 1.3;  font-weight: 600; }
+
+.label {
+  font-size: 12px;
+  line-height: 1.3;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--c-ink-soft);
+}
+
+.text-klein {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+
+/* ---------- 4. Layout ---------- */
+.container {
+  width: 100%;
+  max-width: var(--max-breite);
+  margin-inline: auto;
+  padding-inline: var(--s-5);
+}
+
+.abschnitt {
+  padding-block: var(--s-7);
+}
+
+.abschnitt--grau {
+  background: var(--c-bg-grey);
+}
+
+.abschnitt h2 {
+  margin-bottom: var(--s-5);
+}
+
+
+/* ---------- 5. Komponenten ---------- */
+
+/* Knopf (Button) */
+.knopf {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--touch);
+  padding: 0 var(--s-5);
+  border: 2px solid transparent;
+  border-radius: var(--r-rund);
+  font: 600 16px/1 var(--font);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.knopf--primaer {
+  background: var(--c-primary);
+  color: var(--c-bg);
+}
+
+.knopf--primaer:hover {
+  background: var(--c-primary-dark);
+}
+
+.knopf--sekundaer {
+  background: var(--c-bg);
+  color: var(--c-primary);
+  border-color: var(--c-primary);
+}
+
+.knopf--sekundaer:hover {
+  background: var(--c-bg-mint);
+}
+
+.knopf--klein {
+  min-height: 44px;
+  padding: 0 var(--s-4);
+  font-size: 14px;
+}
+
+/* Chips (Beispielfragen) */
+.chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 var(--s-4);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-rund);
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-size: 14px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.chip:hover {
+  border-color: var(--c-primary);
+  color: var(--c-primary);
+}
+
+/* Karte */
+.karte {
+  background: var(--c-bg);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-mittel);
+  padding: var(--s-5);
+}
+
+/* Avatar „Tri“ (Arbeitsstand) im Mint-Kreis */
+.avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--c-bg-mint);
+}
+
+.avatar svg { width: 72%; }
+.avatar--klein { width: 40px;  height: 40px; }
+.avatar--gross { width: 120px; height: 120px; }
+
+/* Farben des Avatar-SVGs kommen aus den Variablen */
+.tri__koerper { fill: var(--c-avatar); }
+.tri__auge    { fill: var(--c-bg); }
+.tri__pupille { fill: var(--c-ink); }
+.tri__mund    { fill: none; stroke: var(--c-ink); stroke-width: 3; stroke-linecap: round; }
+.tri__wange   { fill: var(--c-coral); opacity: 0.45; }
+
+/* Platzhalter für Bilder, die noch fehlen */
+.platzhalter {
+  display: grid;
+  place-items: center;
+  min-height: 240px;
+  padding: var(--s-5);
+  text-align: center;
+  font-size: 14px;
+  color: var(--c-ink-soft);
+  background: var(--c-bg-grey);
+  border: 2px dashed var(--c-line);
+  border-radius: var(--r-gross);
+}
+
+
+/* ---------- 6. Startseite (index.html) ---------- */
+
+/* Kopfzeile */
+.kopfzeile {
+  background: var(--c-bg);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.kopfzeile__inhalt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 64px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-weight: 700;
+  color: var(--c-ink);
+  text-decoration: none;
+}
+
+.logo__zeichen {
+  width: 28px;
+  height: auto;
+  color: var(--c-primary);
+}
+
+.sprache {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 var(--s-3);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-rund);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--c-ink-soft);
+  text-decoration: none;
+}
+
+/* Hero (großer Einstieg oben) */
+.hero {
+  background: var(--c-bg-grey);
+  padding-block: var(--s-6) var(--s-7);
+}
+
+.hero__raster {
+  display: grid;
+  gap: var(--s-6);
+}
+
+.hero__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.hero__unterzeile {
+  color: var(--c-ink-soft);
+}
+
+.knopfreihe {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  margin-top: var(--s-2);
+}
+
+.hero__bild {
+  aspect-ratio: 4 / 3;
+}
+
+/* So funktioniert's – drei Schritte */
+.schritte {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--s-4);
+}
+
+.schritt {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s-4);
+}
+
+.schritt__nr {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--c-bg-mint);
+  color: var(--c-primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.schritt p {
+  margin-top: var(--s-1);
+  font-size: 14px;
+  color: var(--c-ink-soft);
+}
+
+/* Fußzeile */
+.fusszeile {
+  padding-block: var(--s-5);
+  border-top: 1px solid var(--c-line);
+  font-size: 14px;
+  color: var(--c-ink-soft);
+}
+
+.fusszeile__inhalt {
+  display: flex;
+  flex-direction: column-reverse; /* mobil: Links oben, Projekttext unten */
+  gap: var(--s-3);
+}
+
+.fusszeile__links {
+  display: flex;
+  gap: var(--s-5);
+}
+
+.fusszeile a {
+  color: var(--c-ink);
+}
+
+
+/* ---------- 7. Ladebildschirm (laden.html) ---------- */
+.ladeseite {
+  background: var(--c-primary-dark);
+  color: var(--c-bg);
+}
+
+.laden {
+  min-height: 100vh;
+  min-height: 100dvh; /* berücksichtigt die Adressleiste am Handy */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-5);
+  padding: var(--s-5);
+  text-align: center;
+}
+
+.laden__titel {
+  font-size: 24px;
+}
+
+.ladebalken {
+  width: min(100%, 320px);
+  height: 10px;
+  overflow: hidden;
+  border-radius: var(--r-rund);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.ladebalken__fuellung {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--c-accent);
+  animation: laden 3.5s ease-out forwards; /* Demo – später echter Fortschritt per JS */
+}
+
+@keyframes laden {
+  to { width: 100%; }
+}
+
+.laden__tipp {
+  max-width: 32ch;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.laden__link {
+  font-size: 14px;
+  color: var(--c-bg);
+}
+
+/* Avatar wippt leicht, solange geladen wird */
+.avatar--wippt svg {
+  animation: wippen 1.6s ease-in-out infinite;
+}
+
+@keyframes wippen {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+
+/* ---------- 8. Tour-Ansicht (tour.html) ---------- */
+.tourseite {
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* nur der Chatverlauf scrollt */
+}
+
+.tour-kopf {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s-1) var(--s-4);
+  border-bottom: 1px solid var(--c-line);
+}
+
+.zurueck {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--c-ink);
+  text-decoration: none;
+}
+
+.tour {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); /* verhindert, dass die Chip-Zeile die Seite verbreitert */
+  grid-template-rows: 1fr auto;          /* mobil: oben 3D, unten Chat */
+}
+
+/* Fläche, in die später der Unity-Web-Build geladen wird */
+.tour__ansicht {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 200px;
+  background: var(--c-ink);
+  color: var(--c-bg);
+}
+
+.tour__platzhalter {
+  text-align: center;
+}
+
+.tour__platzhalter-titel {
+  font-weight: 600;
+}
+
+.tour__platzhalter p + p {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Start/Ziel-Leiste über der 3D-Ansicht */
+.route-leiste {
+  position: absolute;
+  top: var(--s-3);
+  left: var(--s-3);
+  right: var(--s-3);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  padding: var(--s-2) var(--s-2) var(--s-2) var(--s-4);
+  background: var(--c-bg);
+  color: var(--c-ink);
+  border-left: 6px solid var(--c-accent);
+  border-radius: var(--r-mittel);
+}
+
+.route-leiste__ziel {
+  font-weight: 600;
+}
+
+.route-leiste__info {
+  font-size: 14px;
+  color: var(--c-ink-soft);
+}
+
+/* Chat mit dem Wegweiser */
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  min-height: 0;
+  max-height: 60vh;
+  max-height: 60dvh;
+  padding: var(--s-4);
+  background: var(--c-bg);
+  border-top: 1px solid var(--c-line);
+}
+
+.chat__kopf {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+
+.chat__name {
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.chat__status {
+  font-size: 14px;
+  color: var(--c-ink-soft);
+}
+
+.chat__verlauf {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+}
+
+.nachricht {
+  max-width: 80%;
+  padding: var(--s-2) var(--s-4);
+  border-radius: var(--r-gross);
+}
+
+.nachricht--bot {            /* Bot links, hellgrau */
+  align-self: flex-start;
+  background: var(--c-bg-grey);
+  border-bottom-left-radius: var(--r-klein);
+}
+
+.nachricht--nutzer {         /* Nutzer rechts, Petrol */
+  align-self: flex-end;
+  background: var(--c-primary);
+  color: var(--c-bg);
+  border-bottom-right-radius: var(--r-klein);
+}
+
+/* Vorschlags-Chips im Chat: eine Zeile, seitlich wischbar */
+.chips--scroll {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.chat__eingabe {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.chat__eingabe input {
+  flex: 1;
+  min-width: 0;
+  min-height: var(--touch);
+  padding: 0 var(--s-4);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-rund);
+  font: 16px var(--font); /* 16 px, sonst zoomt iOS beim Antippen hinein */
+  color: var(--c-ink);
+}
+
+.chat__eingabe input::placeholder {
+  color: var(--c-ink-soft);
+}
+
+
+/* ---------- 9. Größere Bildschirme (ab 900 px) ---------- */
+@media (min-width: 900px) {
+  .hero {
+    padding-block: 96px;
+  }
+
+  .hero__raster {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: var(--s-7);
+  }
+
+  .hero h1 {
+    font-size: 52px;   /* Display/Desktop 52 */
+    line-height: 1.1;
+  }
+
+  .knopfreihe {
+    flex-direction: row;
+  }
+
+  .schritte {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .fusszeile__inhalt {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  /* Tour: 3D links, Chat als Spalte rechts */
+  .tour {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    grid-template-rows: 1fr;
+  }
+
+  .chat {
+    max-height: none;
+    border-top: 0;
+    border-left: 1px solid var(--c-line);
+  }
+}
+
+/* Weniger Bewegung, wenn im System so eingestellt */
+@media (prefers-reduced-motion: reduce) {
+  .avatar--wippt svg,
+  .ladebalken__fuellung {
+    animation: none;
+  }
+
+  .ladebalken__fuellung {
+    width: 100%;
+  }
+}

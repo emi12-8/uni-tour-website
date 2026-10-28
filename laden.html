@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Nur für die Demo: nach 4 Sekunden automatisch zur Tour.
+       Später ersetzt JavaScript das durch den echten Ladefortschritt von Unity. -->
+  <meta http-equiv="refresh" content="4; url=tour.html">
+  <title>Tour wird geladen – Campus-Kompass EAH</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="ladeseite">
+
+  <main class="laden">
+
+    <!-- Avatar „Tri“ (Arbeitsstand) -->
+    <div class="avatar avatar--gross avatar--wippt">
+      <svg viewBox="0 0 100 100" aria-hidden="true">
+        <path class="tri__koerper" d="M50 10 Q55 10 58 16 L89 74 Q93 82 84 82 H16 Q7 82 11 74 L42 16 Q45 10 50 10Z"/>
+        <circle class="tri__auge" cx="40" cy="55" r="6"/>
+        <circle class="tri__auge" cx="60" cy="55" r="6"/>
+        <circle class="tri__pupille" cx="41" cy="56" r="3"/>
+        <circle class="tri__pupille" cx="61" cy="56" r="3"/>
+        <ellipse class="tri__wange" cx="32" cy="66" rx="4" ry="2.5"/>
+        <ellipse class="tri__wange" cx="68" cy="66" rx="4" ry="2.5"/>
+        <path class="tri__mund" d="M44 66 Q50 72 56 66"/>
+      </svg>
+    </div>
+
+    <h1 class="laden__titel">Die Tour wird geladen …</h1>
+
+    <div class="ladebalken" role="progressbar" aria-label="Ladefortschritt">
+      <div class="ladebalken__fuellung"></div>
+    </div>
+
+    <p class="laden__tipp">Tipp: Raumnummern wie 3.3.42 versteht der Wegweiser direkt.</p>
+
+    <a href="tour.html" class="laden__link">Weiter zur Tour</a>
+
+  </main>
+
+</body>
+</html>

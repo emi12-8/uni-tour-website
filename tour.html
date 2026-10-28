@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tour – Campus-Kompass EAH</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="tourseite">
+
+  <!-- Schmale Kopfzeile: zurück zur Startseite, Sprache -->
+  <header class="tour-kopf">
+    <a href="index.html" class="zurueck">← Start</a>
+    <a href="#" class="sprache" lang="en" aria-label="Switch to English">EN</a>
+  </header>
+
+  <main class="tour">
+
+    <!-- 3D-Ansicht: hier kommt später der Unity-Web-Build (canvas) hinein -->
+    <section class="tour__ansicht" aria-label="3D-Ansicht">
+
+      <!-- Start/Ziel-Leiste, sobald eine Route aktiv ist -->
+      <div class="route-leiste">
+        <div>
+          <p class="route-leiste__ziel">Route zu 3.3.42</p>
+          <p class="route-leiste__info">ca. 2 Min · über Treppe</p>
+        </div>
+        <a href="tour.html" class="knopf knopf--sekundaer knopf--klein">Beenden</a>
+      </div>
+
+      <div class="tour__platzhalter">
+        <p class="tour__platzhalter-titel">3D-Ansicht (Unity-Web-Build)</p>
+        <p>Wischen zum Umsehen</p>
+      </div>
+    </section>
+
+    <!-- Chat mit dem Wegweiser -->
+    <aside class="chat" aria-label="Chat mit dem Wegweiser">
+
+      <div class="chat__kopf">
+        <div class="avatar avatar--klein">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <path class="tri__koerper" d="M50 10 Q55 10 58 16 L89 74 Q93 82 84 82 H16 Q7 82 11 74 L42 16 Q45 10 50 10Z"/>
+            <circle class="tri__auge" cx="40" cy="55" r="7"/>
+            <circle class="tri__auge" cx="60" cy="55" r="7"/>
+            <circle class="tri__pupille" cx="41" cy="56" r="3.5"/>
+            <circle class="tri__pupille" cx="61" cy="56" r="3.5"/>
+          </svg>
+        </div>
+        <div>
+          <p class="chat__name">Wegweiser</p>
+          <p class="chat__status">online</p>
+        </div>
+      </div>
+
+      <!-- Beispielverlauf, später füllt JavaScript diese Liste -->
+      <ol class="chat__verlauf" aria-live="polite">
+        <li class="nachricht nachricht--bot">Hallo! Wohin möchtest du?</li>
+        <li class="nachricht nachricht--nutzer">Wo ist Raum 3.3.42?</li>
+        <li class="nachricht nachricht--bot">Raum 3.3.42 ist im 3. Stock. Folge der gelben Linie!</li>
+      </ol>
+
+      <ul class="chips chips--scroll" aria-label="Vorschläge">
+        <li><a href="#" class="chip">Wo ist das Sekretariat?</a></li>
+        <li><a href="#" class="chip">Gibt es einen Aufzug?</a></li>
+        <li><a href="#" class="chip">Wo ist die Mensa?</a></li>
+      </ul>
+
+      <form class="chat__eingabe" action="#">
+        <label for="frage" class="nur-screenreader">Deine Frage an den Wegweiser</label>
+        <input id="frage" type="text" placeholder="Wohin möchtest du?" autocomplete="off">
+        <button type="submit" class="knopf knopf--primaer">Senden</button>
+      </form>
+
+    </aside>
+
+  </main>
+
+</body>
+</html>
