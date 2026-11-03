@@ -1,35 +1,21 @@
 /* =========================================================
-   Campus-Kompass EAH – Stylesheet
-   Stand 26.10.2026 · Werte 1:1 aus dem Figma-Styleguide (22.10.2026)
-   Aufbau:
-   1. Variablen (Design-Tokens)
-   2. Grundlagen / Reset
-   3. Schrift-Stile
-   4. Layout
-   5. Komponenten (Knopf, Chip, Karte, Avatar, Platzhalter)
-   6. Startseite (index.html)
-   7. Ladebildschirm (laden.html)
-   8. Tour-Ansicht (tour.html)
-   9. Größere Bildschirme (Desktop) & Barrierefreiheit
+   Campus-Kompass EAH
+   Farben angelehnt an EAH Corporate Design / Brandfetch
    ========================================================= */
 
-
-/* ---------- 1. Variablen (Design-Tokens) ---------- */
 :root {
-  /* Farben – jede Farbe hat eine feste Aufgabe */
-  --c-primary: #00727D;       /* Petrol: Buttons, Links, Akzente */
-  --c-primary-dark: #00535B;  /* Hover, Ladebildschirm */
-  --c-ink: #14202B;           /* Nachtblau: Haupttext, dunkle Flächen */
-  --c-ink-soft: #5A6672;      /* Nebentext */
-  --c-bg: #FFFFFF;            /* Seitenhintergrund */
-  --c-bg-mint: #E3F3F4;       /* Karten, Avatar-Kreis */
-  --c-bg-grey: #EEF2F5;       /* Bot-Blasen, Sektionen */
-  --c-accent: #F2B33D;        /* Wegweiser-Gelb: Route, Fokus – nie als Textfarbe */
-  --c-coral: #E85D75;         /* Ziel-Pin, kleine Akzente */
-  --c-line: #DDE3E8;          /* Rahmen, Trennlinien */
-  --c-avatar: #14A3A3;        /* Körperfarbe Avatar */
+  --c-primary: #009999;
+  --c-primary-dark: #007a7a;
+  --c-ink: #34495B;
+  --c-ink-soft: #5A6B7A;
+  --c-bg: #FFFFFF;
+  --c-bg-mint: #E8F6F6;
+  --c-bg-grey: #F2F5F7;
+  --c-accent: #F7BB3D;
+  --c-line: #D5DEE5;
+  --c-avatar: #14A3A3;
+  --c-nacht: #1B2A36;
 
-  /* Abstände – nur diese Stufen verwenden */
   --s-1: 4px;
   --s-2: 8px;
   --s-3: 12px;
@@ -37,60 +23,57 @@
   --s-5: 24px;
   --s-6: 32px;
   --s-7: 48px;
+  --s-8: 72px;
 
-  /* Radien */
-  --r-klein: 6px;
-  --r-mittel: 14px;
-  --r-gross: 20px;
+  --r-klein: 8px;
+  --r-mittel: 16px;
+  --r-gross: 24px;
   --r-rund: 999px;
 
-  /* Schrift: Inter, bis sie lokal eingebunden ist greift die Systemschrift */
-  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --font: "Manrope", system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
 
-  /* Sonstiges */
-  --max-breite: 1120px;  /* maximale Inhaltsbreite am Desktop */
-  --touch: 48px;         /* Mindesthöhe für Touch-Ziele */
+  --max-breite: 1120px;
+  --touch: 48px;
 }
 
-
-/* ---------- 2. Grundlagen / Reset ---------- */
 *,
 *::before,
-*::after {
-  box-sizing: border-box; /* Breite enthält Innenabstand und Rahmen */
-}
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
   font-family: var(--font);
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--c-ink);
   background: var(--c-bg);
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, p {
-  margin: 0;
+h1, h2, h3, p { margin: 0; }
+
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--c-nacht);
 }
 
-img,
-svg {
-  display: block;
-  max-width: 100%;
-}
+h1 { font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.08; }
+h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.15; }
+h3 { font-size: 1.125rem; line-height: 1.3; font-weight: 700; }
 
-a {
-  color: var(--c-primary);
-}
+img, svg { display: block; max-width: 100%; }
+a { color: var(--c-primary); }
 
-/* Gut sichtbarer Fokus-Rahmen für Tastatur-Nutzer */
 :focus-visible {
   outline: 3px solid var(--c-accent);
   outline-offset: 2px;
 }
 
-/* Text nur für Screenreader, optisch versteckt */
 .nur-screenreader {
   position: absolute;
   width: 1px;
@@ -100,28 +83,15 @@ a {
   white-space: nowrap;
 }
 
-
-/* ---------- 3. Schrift-Stile ---------- */
-h1 { font-size: 32px; line-height: 1.15; font-weight: 700; }
-h2 { font-size: 24px; line-height: 1.25; font-weight: 700; }
-h3 { font-size: 18px; line-height: 1.3;  font-weight: 600; }
-
 .label {
-  font-size: 12px;
-  line-height: 1.3;
-  font-weight: 600;
+  margin-bottom: var(--s-3);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.04em;
-  color: var(--c-ink-soft);
+  color: var(--c-primary);
 }
 
-.text-klein {
-  font-size: 14px;
-  line-height: 1.45;
-}
-
-
-/* ---------- 4. Layout ---------- */
 .container {
   width: 100%;
   max-width: var(--max-breite);
@@ -130,21 +100,77 @@ h3 { font-size: 18px; line-height: 1.3;  font-weight: 600; }
 }
 
 .abschnitt {
-  padding-block: var(--s-7);
+  padding-block: var(--s-8);
 }
 
-.abschnitt--grau {
-  background: var(--c-bg-grey);
+.abschnitt h2 { margin-bottom: var(--s-6); }
+
+.abschnitt--dunkel {
+  background: var(--c-nacht);
+  color: #fff;
 }
 
-.abschnitt h2 {
-  margin-bottom: var(--s-5);
+.abschnitt--dunkel h2 { color: #fff; }
+
+
+/* ---------- Kopfzeile ---------- */
+.kopfzeile {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 10;
+  padding-block: var(--s-4);
+}
+
+.kopfzeile__inhalt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-3);
+  text-decoration: none;
+  color: #fff;
+  min-height: 44px;
+}
+
+.logo__eah {
+  height: 34px;
+  width: auto;
+}
+
+.logo__trenner {
+  width: 1px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.logo__produkt {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.sprache {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: var(--r-rund);
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 
-/* ---------- 5. Komponenten ---------- */
-
-/* Knopf (Button) */
+/* ---------- Buttons ---------- */
 .knopf {
   display: inline-flex;
   align-items: center;
@@ -153,41 +179,60 @@ h3 { font-size: 18px; line-height: 1.3;  font-weight: 600; }
   padding: 0 var(--s-5);
   border: 2px solid transparent;
   border-radius: var(--r-rund);
-  font: 600 16px/1 var(--font);
+  font: 700 1rem/1 var(--font);
   text-decoration: none;
   cursor: pointer;
-  transition: background-color 0.15s, color 0.15s;
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
+
+.knopf:hover { transform: translateY(-1px); }
 
 .knopf--primaer {
   background: var(--c-primary);
-  color: var(--c-bg);
+  color: #fff;
 }
 
-.knopf--primaer:hover {
-  background: var(--c-primary-dark);
-}
+.knopf--primaer:hover { background: var(--c-primary-dark); }
 
 .knopf--sekundaer {
-  background: var(--c-bg);
+  background: #fff;
   color: var(--c-primary);
   border-color: var(--c-primary);
 }
 
-.knopf--sekundaer:hover {
-  background: var(--c-bg-mint);
+.knopf--hell {
+  background: #fff;
+  color: var(--c-nacht);
 }
+
+.knopf--hell:hover { background: var(--c-bg-mint); }
+
+.knopf--glas {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+.knopf--glas:hover { background: rgba(255, 255, 255, 0.22); }
 
 .knopf--klein {
-  min-height: 44px;
+  min-height: 40px;
   padding: 0 var(--s-4);
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
-/* Chips (Beispielfragen) */
+.knopfreihe {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+
+
+/* ---------- Chips ---------- */
 .chips {
   list-style: none;
-  margin: 0;
+  margin: var(--s-5) 0 0;
   padding: 0;
   display: flex;
   flex-wrap: wrap;
@@ -201,281 +246,321 @@ h3 { font-size: 18px; line-height: 1.3;  font-weight: 600; }
   padding: 0 var(--s-4);
   border: 1px solid var(--c-line);
   border-radius: var(--r-rund);
-  background: var(--c-bg);
+  background: #fff;
   color: var(--c-ink);
-  font-size: 14px;
+  font: 600 0.9rem/1 var(--font);
   text-decoration: none;
   white-space: nowrap;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
 }
 
 .chip:hover {
   border-color: var(--c-primary);
   color: var(--c-primary);
-}
-
-/* Karte */
-.karte {
-  background: var(--c-bg);
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-mittel);
-  padding: var(--s-5);
-}
-
-/* Avatar „Tri“ (Arbeitsstand) im Mint-Kreis */
-.avatar {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  border-radius: 50%;
   background: var(--c-bg-mint);
 }
 
-.avatar svg { width: 72%; }
-.avatar--klein { width: 40px;  height: 40px; }
-.avatar--gross { width: 120px; height: 120px; }
+button.chip { font-family: inherit; }
 
-/* Farben des Avatar-SVGs kommen aus den Variablen */
-.tri__koerper { fill: var(--c-avatar); }
-.tri__auge    { fill: var(--c-bg); }
-.tri__pupille { fill: var(--c-ink); }
-.tri__mund    { fill: none; stroke: var(--c-ink); stroke-width: 3; stroke-linecap: round; }
-.tri__wange   { fill: var(--c-coral); opacity: 0.45; }
 
-/* Platzhalter für Bilder, die noch fehlen */
-.platzhalter {
+/* ---------- Hero full-bleed ---------- */
+.hero-bleed {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
-  place-items: center;
-  min-height: 240px;
-  padding: var(--s-5);
-  text-align: center;
-  font-size: 14px;
-  color: var(--c-ink-soft);
-  background: var(--c-bg-grey);
-  border: 2px dashed var(--c-line);
-  border-radius: var(--r-gross);
+  align-items: end;
+  overflow: hidden;
+  color: #fff;
 }
 
-
-/* ---------- 6. Startseite (index.html) ---------- */
-
-/* Kopfzeile */
-.kopfzeile {
-  background: var(--c-bg);
-  border-bottom: 1px solid var(--c-line);
+.hero-bleed__bild {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.04);
+  animation: heroZoom 12s ease-out forwards;
 }
 
-.kopfzeile__inhalt {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  min-height: 64px;
+.hero-bleed__schatten {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(27, 42, 54, 0.45) 0%, rgba(27, 42, 54, 0.25) 35%, rgba(27, 42, 54, 0.82) 100%),
+    linear-gradient(90deg, rgba(0, 153, 153, 0.28), transparent 55%);
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: var(--s-2);
+.hero-bleed__inhalt {
+  position: relative;
+  z-index: 1;
+  padding-block: 7rem 4rem;
+  max-width: 40rem;
+  margin-inline: 0 auto 0;
+  animation: riseIn 0.8s ease-out both;
+}
+
+.hero-bleed__marke {
+  margin-bottom: var(--s-3);
+  font-size: 0.8rem;
   font-weight: 700;
-  color: var(--c-ink);
-  text-decoration: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-accent);
 }
 
-.logo__zeichen {
-  width: 28px;
-  height: auto;
-  color: var(--c-primary);
+.hero-bleed h1 {
+  color: #fff;
+  margin-bottom: var(--s-4);
+  text-wrap: balance;
 }
 
-.sprache {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 44px;
-  min-height: 44px;
-  padding: 0 var(--s-3);
-  border: 1px solid var(--c-line);
-  border-radius: var(--r-rund);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--c-ink-soft);
-  text-decoration: none;
+.hero-bleed__text {
+  max-width: 34rem;
+  margin-bottom: var(--s-6);
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.88);
 }
 
-/* Hero (großer Einstieg oben) */
-.hero {
-  background: var(--c-bg-grey);
-  padding-block: var(--s-6) var(--s-7);
+@keyframes heroZoom {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
 }
 
-.hero__raster {
-  display: grid;
-  gap: var(--s-6);
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.hero__text {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-4);
-}
 
-.hero__unterzeile {
-  color: var(--c-ink-soft);
-}
-
-.knopfreihe {
-  display: flex;
-  flex-direction: column;
-  gap: var(--s-3);
-  margin-top: var(--s-2);
-}
-
-.hero__bild {
-  aspect-ratio: 4 / 3;
-}
-
-/* So funktioniert's – drei Schritte */
+/* ---------- Schritte ---------- */
 .schritte {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  gap: var(--s-4);
-}
-
-.schritt {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--s-4);
+  gap: var(--s-6);
 }
 
 .schritt__nr {
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: var(--c-bg-mint);
+  display: block;
+  margin-bottom: var(--s-3);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
   color: var(--c-primary);
-  font-size: 14px;
-  font-weight: 600;
 }
 
 .schritt p {
-  margin-top: var(--s-1);
-  font-size: 14px;
+  margin-top: var(--s-2);
   color: var(--c-ink-soft);
 }
 
-/* Fußzeile */
-.fusszeile {
-  padding-block: var(--s-5);
-  border-top: 1px solid var(--c-line);
-  font-size: 14px;
+
+/* ---------- Foto-Abschnitt ---------- */
+.abschnitt-foto__raster {
+  display: grid;
+  gap: var(--s-6);
+  align-items: center;
+}
+
+.abschnitt-foto__text {
   color: var(--c-ink-soft);
+  max-width: 34rem;
+}
+
+.foto-rahmen {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--r-gross);
+  box-shadow: 0 24px 60px rgba(27, 42, 54, 0.16);
+}
+
+.foto-rahmen img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+
+/* ---------- CTA ---------- */
+.cta-band__inhalt {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  align-items: flex-start;
+}
+
+.cta-band p {
+  margin-top: var(--s-2);
+  color: rgba(255, 255, 255, 0.75);
+}
+
+
+/* ---------- Footer ---------- */
+.fusszeile {
+  padding-block: var(--s-6);
+  border-top: 1px solid var(--c-line);
+  background: var(--c-bg-grey);
 }
 
 .fusszeile__inhalt {
   display: flex;
-  flex-direction: column-reverse; /* mobil: Links oben, Projekttext unten */
+  flex-direction: column;
+  gap: var(--s-4);
+}
+
+.fusszeile__marke {
+  display: flex;
   gap: var(--s-3);
+  align-items: flex-start;
+  color: var(--c-ink-soft);
+  font-size: 0.9rem;
 }
 
 .fusszeile__links {
   display: flex;
-  gap: var(--s-5);
+  gap: var(--s-4);
 }
 
-.fusszeile a {
+.fusszeile__links a {
   color: var(--c-ink);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.fusszeile__credits {
+  margin-top: var(--s-4);
+  font-size: 0.75rem;
+  color: var(--c-ink-soft);
 }
 
 
-/* ---------- 7. Ladebildschirm (laden.html) ---------- */
+/* ---------- Avatar ---------- */
+.avatar {
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--c-bg-mint);
+  flex-shrink: 0;
+}
+
+.avatar--klein { width: 44px; height: 44px; }
+.avatar--klein svg { width: 28px; height: 28px; }
+.avatar--gross { width: 96px; height: 96px; }
+.avatar--gross svg { width: 64px; height: 64px; }
+
+.tri__koerper { fill: var(--c-avatar); }
+.tri__auge { fill: #fff; }
+.tri__pupille { fill: var(--c-nacht); }
+.tri__wange { fill: #ffb4b4; opacity: 0.7; }
+.tri__mund { fill: none; stroke: var(--c-nacht); stroke-width: 2; stroke-linecap: round; }
+
+.avatar--wippt svg {
+  animation: wippen 2.2s ease-in-out infinite;
+}
+
+@keyframes wippen {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+
+/* ---------- Ladebildschirm ---------- */
 .ladeseite {
-  background: var(--c-primary-dark);
-  color: var(--c-bg);
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 153, 153, 0.18), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(247, 187, 61, 0.16), transparent 40%),
+    var(--c-bg-mint);
 }
 
 .laden {
-  min-height: 100vh;
-  min-height: 100dvh; /* berücksichtigt die Adressleiste am Handy */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--s-5);
-  padding: var(--s-5);
+  width: min(100%, 420px);
+  padding: var(--s-6);
   text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: var(--s-4);
 }
 
-.laden__titel {
-  font-size: 24px;
-}
+.laden__logo { height: 36px; width: auto; margin-bottom: var(--s-2); }
+.laden__titel { font-size: 1.6rem; }
+.laden__unter { color: var(--c-ink-soft); font-size: 0.95rem; }
 
 .ladebalken {
-  width: min(100%, 320px);
-  height: 10px;
-  overflow: hidden;
+  width: 100%;
+  height: 8px;
   border-radius: var(--r-rund);
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(52, 73, 91, 0.12);
+  overflow: hidden;
 }
 
 .ladebalken__fuellung {
   width: 0;
   height: 100%;
   border-radius: inherit;
-  background: var(--c-accent);
-  animation: laden 3.5s ease-out forwards; /* Demo – später echter Fortschritt per JS */
+  background: linear-gradient(90deg, var(--c-primary), var(--c-accent));
+  animation: laden 3.6s ease-in-out forwards;
 }
 
 @keyframes laden {
+  from { width: 8%; }
   to { width: 100%; }
 }
 
-.laden__tipp {
-  max-width: 32ch;
-  color: rgba(255, 255, 255, 0.85);
-}
-
+.laden__tipp { color: var(--c-ink-soft); font-size: 0.9rem; }
 .laden__link {
-  font-size: 14px;
-  color: var(--c-bg);
-}
-
-/* Avatar wippt leicht, solange geladen wird */
-.avatar--wippt svg {
-  animation: wippen 1.6s ease-in-out infinite;
-}
-
-@keyframes wippen {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-6px); }
+  font-weight: 700;
+  color: var(--c-primary);
 }
 
 
-/* ---------- 8. Tour-Ansicht (tour.html) ---------- */
+/* ---------- Tour ---------- */
 .tourseite {
   height: 100vh;
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* nur der Chatverlauf scrollt */
+  overflow: hidden;
+  background: var(--c-bg);
 }
 
 .tour-kopf {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
   padding: var(--s-1) var(--s-4);
   border-bottom: 1px solid var(--c-line);
+  background: #fff;
+}
+
+.tour-kopf__mitte {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-weight: 700;
+  color: var(--c-nacht);
+}
+
+.tour-kopf .sprache {
+  justify-self: end;
+  color: var(--c-ink);
+  border-color: var(--c-line);
+  background: var(--c-bg-grey);
 }
 
 .zurueck {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--c-ink);
   text-decoration: none;
 }
@@ -484,36 +569,46 @@ h3 { font-size: 18px; line-height: 1.3;  font-weight: 600; }
   flex: 1;
   min-height: 0;
   display: grid;
-  grid-template-columns: minmax(0, 1fr); /* verhindert, dass die Chip-Zeile die Seite verbreitert */
-  grid-template-rows: 1fr auto;          /* mobil: oben 3D, unten Chat */
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr auto;
 }
 
-/* Fläche, in die später der Unity-Web-Build geladen wird */
 .tour__ansicht {
   position: relative;
   display: grid;
   place-items: center;
   min-height: 200px;
-  background: var(--c-ink);
-  color: var(--c-bg);
+  background:
+    linear-gradient(160deg, rgba(0, 153, 153, 0.35), transparent 50%),
+    url("assets/img/campus-karte.png") center / cover;
+  color: #fff;
+}
+
+.tour__ansicht::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(27, 42, 54, 0.72);
 }
 
 .tour__platzhalter {
+  position: relative;
+  z-index: 1;
   text-align: center;
+  display: grid;
+  justify-items: center;
+  gap: var(--s-2);
 }
 
-.tour__platzhalter-titel {
-  font-weight: 600;
-}
+.tour__mini-logo { filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25)); }
+.tour__platzhalter-titel { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; }
+.tour__platzhalter p + p { font-size: 0.9rem; color: rgba(255, 255, 255, 0.75); }
 
-.tour__platzhalter p + p {
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.7);
-}
+.route-leiste[hidden] { display: none; }
 
-/* Start/Ziel-Leiste über der 3D-Ansicht */
 .route-leiste {
   position: absolute;
+  z-index: 2;
   top: var(--s-3);
   left: var(--s-3);
   right: var(--s-3);
@@ -522,31 +617,25 @@ h3 { font-size: 18px; line-height: 1.3;  font-weight: 600; }
   justify-content: space-between;
   gap: var(--s-3);
   padding: var(--s-2) var(--s-2) var(--s-2) var(--s-4);
-  background: var(--c-bg);
+  background: #fff;
   color: var(--c-ink);
   border-left: 6px solid var(--c-accent);
   border-radius: var(--r-mittel);
+  box-shadow: 0 10px 30px rgba(27, 42, 54, 0.18);
 }
 
-.route-leiste__ziel {
-  font-weight: 600;
-}
+.route-leiste__ziel { font-weight: 700; }
+.route-leiste__info { font-size: 0.875rem; color: var(--c-ink-soft); }
 
-.route-leiste__info {
-  font-size: 14px;
-  color: var(--c-ink-soft);
-}
-
-/* Chat mit dem Wegweiser */
 .chat {
   display: flex;
   flex-direction: column;
   gap: var(--s-3);
   min-height: 0;
-  max-height: 60vh;
-  max-height: 60dvh;
+  max-height: 58vh;
+  max-height: 58dvh;
   padding: var(--s-4);
-  background: var(--c-bg);
+  background: #fff;
   border-top: 1px solid var(--c-line);
 }
 
@@ -556,15 +645,8 @@ h3 { font-size: 18px; line-height: 1.3;  font-weight: 600; }
   gap: var(--s-3);
 }
 
-.chat__name {
-  font-weight: 600;
-  line-height: 1.2;
-}
-
-.chat__status {
-  font-size: 14px;
-  color: var(--c-ink-soft);
-}
+.chat__name { font-weight: 700; line-height: 1.2; }
+.chat__status { font-size: 0.85rem; color: var(--c-ink-soft); }
 
 .chat__verlauf {
   flex: 1;
@@ -579,85 +661,150 @@ h3 { font-size: 18px; line-height: 1.3;  font-weight: 600; }
 }
 
 .nachricht {
-  max-width: 80%;
+  max-width: 82%;
   padding: var(--s-2) var(--s-4);
   border-radius: var(--r-gross);
 }
 
-.nachricht--bot {            /* Bot links, hellgrau */
+.nachricht--bot {
   align-self: flex-start;
   background: var(--c-bg-grey);
   border-bottom-left-radius: var(--r-klein);
 }
 
-.nachricht--nutzer {         /* Nutzer rechts, Petrol */
+.nachricht--nutzer {
   align-self: flex-end;
   background: var(--c-primary);
-  color: var(--c-bg);
+  color: #fff;
   border-bottom-right-radius: var(--r-klein);
 }
 
-/* Vorschlags-Chips im Chat: eine Zeile, seitlich wischbar */
+.nachricht--fehler {
+  align-self: flex-start;
+  background: #FDE8EC;
+  color: #C62828;
+  border: 1px solid #E85D75;
+  border-bottom-left-radius: var(--r-klein);
+  font-weight: 600;
+}
+
 .chips--scroll {
   flex-wrap: nowrap;
   overflow-x: auto;
   scrollbar-width: none;
+  margin-top: 0;
 }
 
 .chat__eingabe {
   display: flex;
+  flex-direction: column;
   gap: var(--s-2);
 }
 
+.chat__zeile {
+  display: flex;
+  gap: var(--s-2);
+}
+
+.chat__zeile .knopf { flex-shrink: 0; }
+
 .chat__eingabe input {
-  flex: 1;
+  width: 100%;
   min-width: 0;
   min-height: var(--touch);
   padding: 0 var(--s-4);
   border: 1px solid var(--c-line);
   border-radius: var(--r-rund);
-  font: 16px var(--font); /* 16 px, sonst zoomt iOS beim Antippen hinein */
+  font: 16px var(--font);
   color: var(--c-ink);
+  background: #fff;
 }
 
-.chat__eingabe input::placeholder {
+.chat__zeile input { flex: 1; }
+
+.chat__eingabe input::placeholder { color: var(--c-ink-soft); }
+
+.startwahl { position: relative; }
+
+.startwahl__liste {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  bottom: calc(100% + var(--s-1));
+  max-height: 220px;
+  margin: 0;
+  padding: var(--s-1);
+  overflow-y: auto;
+  list-style: none;
+  background: #fff;
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-mittel);
+  box-shadow: 0 12px 32px rgba(27, 42, 54, 0.18);
+}
+
+.startwahl__option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 var(--s-3);
+  border: 0;
+  border-radius: var(--r-klein);
+  background: transparent;
+  color: var(--c-ink);
+  font: 16px/1.3 var(--font);
+  text-align: left;
+  cursor: pointer;
+}
+
+.startwahl__option[aria-selected="true"],
+.startwahl__option:hover {
+  background: var(--c-bg-mint);
+}
+
+.startwahl__hinweis {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.35;
   color: var(--c-ink-soft);
 }
 
 
-/* ---------- 9. Größere Bildschirme (ab 900 px) ---------- */
+/* ---------- Desktop ---------- */
 @media (min-width: 900px) {
-  .hero {
-    padding-block: 96px;
-  }
+  .logo__eah { height: 40px; }
 
-  .hero__raster {
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: var(--s-7);
-  }
-
-  .hero h1 {
-    font-size: 52px;   /* Display/Desktop 52 */
-    line-height: 1.1;
-  }
-
-  .knopfreihe {
-    flex-direction: row;
+  .hero-bleed__inhalt {
+    padding-block: 8rem 5rem;
+    margin-left: max(0px, calc((100vw - var(--max-breite)) / 2));
+    padding-left: var(--s-5);
   }
 
   .schritte {
     grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-6);
+  }
+
+  .abschnitt-foto__raster {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: var(--s-7);
+  }
+
+  .cta-band__inhalt {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .fusszeile__inhalt {
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
   }
 
-  /* Tour: 3D links, Chat als Spalte rechts */
   .tour {
-    grid-template-columns: minmax(0, 1fr) 380px;
+    grid-template-columns: minmax(0, 1fr) 400px;
     grid-template-rows: 1fr;
   }
 
@@ -668,14 +815,15 @@ h3 { font-size: 18px; line-height: 1.3;  font-weight: 600; }
   }
 }
 
-/* Weniger Bewegung, wenn im System so eingestellt */
 @media (prefers-reduced-motion: reduce) {
+  .hero-bleed__bild,
+  .hero-bleed__inhalt,
   .avatar--wippt svg,
   .ladebalken__fuellung {
     animation: none;
   }
 
-  .ladebalken__fuellung {
-    width: 100%;
-  }
+  .hero-bleed__bild { transform: none; }
+  .ladebalken__fuellung { width: 100%; }
+  .knopf:hover { transform: none; }
 }

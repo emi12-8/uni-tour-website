@@ -3,40 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tour – Campus-Kompass EAH</title>
+  <title>Tour · Campus-Kompass EAH</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="tourseite">
 
-  <!-- Schmale Kopfzeile: zurück zur Startseite, Sprache -->
   <header class="tour-kopf">
     <a href="index.html" class="zurueck">← Start</a>
+    <div class="tour-kopf__mitte">
+      <img src="assets/logo/eah-mark.svg" alt="" width="22" height="22">
+      <span>Campus-Kompass</span>
+    </div>
     <a href="#" class="sprache" lang="en" aria-label="Switch to English">EN</a>
   </header>
 
   <main class="tour">
 
-    <!-- 3D-Ansicht: hier kommt später der Unity-Web-Build (canvas) hinein -->
     <section class="tour__ansicht" aria-label="3D-Ansicht">
-
-      <!-- Start/Ziel-Leiste, sobald eine Route aktiv ist -->
-      <div class="route-leiste">
+      <div class="route-leiste" id="route-leiste" hidden>
         <div>
-          <p class="route-leiste__ziel">Route zu 3.3.42</p>
-          <p class="route-leiste__info">ca. 2 Min · über Treppe</p>
+          <p class="route-leiste__ziel" id="route-ziel"></p>
+          <p class="route-leiste__info" id="route-info"></p>
         </div>
-        <a href="tour.html" class="knopf knopf--sekundaer knopf--klein">Beenden</a>
+        <button type="button" class="knopf knopf--sekundaer knopf--klein" id="route-beenden">Beenden</button>
       </div>
 
       <div class="tour__platzhalter">
-        <p class="tour__platzhalter-titel">3D-Ansicht (Unity-Web-Build)</p>
-        <p>Wischen zum Umsehen</p>
+        <img class="tour__mini-logo" src="assets/logo/eah-mark.svg" alt="" width="36" height="36">
+        <p class="tour__platzhalter-titel">3D-Ansicht</p>
+        <p>Unity-Web-Build · Wischen zum Umsehen</p>
       </div>
     </section>
 
-    <!-- Chat mit dem Wegweiser -->
     <aside class="chat" aria-label="Chat mit dem Wegweiser">
-
       <div class="chat__kopf">
         <div class="avatar avatar--klein">
           <svg viewBox="0 0 100 100" aria-hidden="true">
@@ -49,32 +51,39 @@
         </div>
         <div>
           <p class="chat__name">Wegweiser</p>
-          <p class="chat__status">online</p>
+          <p class="chat__status">online · EAH Jena</p>
         </div>
       </div>
 
-      <!-- Beispielverlauf, später füllt JavaScript diese Liste -->
-      <ol class="chat__verlauf" aria-live="polite">
+      <ol class="chat__verlauf" id="chat-verlauf" aria-live="polite">
         <li class="nachricht nachricht--bot">Hallo! Wohin möchtest du?</li>
-        <li class="nachricht nachricht--nutzer">Wo ist Raum 3.3.42?</li>
-        <li class="nachricht nachricht--bot">Raum 3.3.42 ist im 3. Stock. Folge der gelben Linie!</li>
       </ol>
 
       <ul class="chips chips--scroll" aria-label="Vorschläge">
-        <li><a href="#" class="chip">Wo ist das Sekretariat?</a></li>
-        <li><a href="#" class="chip">Gibt es einen Aufzug?</a></li>
-        <li><a href="#" class="chip">Wo ist die Mensa?</a></li>
+        <li><button type="button" class="chip" data-frage="Wo ist das Sekretariat?">Wo ist das Sekretariat?</button></li>
+        <li><button type="button" class="chip" data-frage="Gibt es einen Aufzug?">Gibt es einen Aufzug?</button></li>
+        <li><button type="button" class="chip" data-frage="Wo ist die nächste Toilette?">Wo ist die nächste Toilette?</button></li>
       </ul>
 
-      <form class="chat__eingabe" action="#">
-        <label for="frage" class="nur-screenreader">Deine Frage an den Wegweiser</label>
-        <input id="frage" type="text" placeholder="Wohin möchtest du?" autocomplete="off">
-        <button type="submit" class="knopf knopf--primaer">Senden</button>
+      <form class="chat__eingabe" id="chat-form" action="#">
+        <div class="startwahl">
+          <label for="start-suche" class="nur-screenreader">Standort</label>
+          <input id="start-suche" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="start-liste" placeholder="Standort suchen" autocomplete="off" enterkeyhint="search">
+          <ul class="startwahl__liste" id="start-liste" role="listbox" hidden></ul>
+        </div>
+        <p class="startwahl__hinweis" id="start-hinweis" hidden></p>
+        <div class="chat__zeile">
+          <label for="frage" class="nur-screenreader">Deine Frage an den Wegweiser</label>
+          <input id="frage" type="text" placeholder="Wohin möchtest du?" autocomplete="off">
+          <button type="submit" class="knopf knopf--primaer">Senden</button>
+        </div>
       </form>
-
     </aside>
 
   </main>
 
+  <script src="js/config.js?v=2"></script>
+  <script src="js/startpunkte.js?v=2"></script>
+  <script src="js/tour.js?v=2"></script>
 </body>
 </html>

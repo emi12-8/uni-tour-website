@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 72" role="img" aria-label="Ernst-Abbe-Hochschule Jena">
+  <g transform="translate(4,8) scale(0.55)">
+    <g fill="#009999">
+      <path d="M60 4 76 32H44Z"/>
+      <path d="M44 32 60 60H28Z"/>
+      <path d="M76 32 92 60H60Z"/>
+      <path d="M28 60 44 88H12Z"/>
+      <path d="M60 60 76 88H44Z"/>
+      <path d="M92 60 108 88H76Z"/>
+    </g>
+  </g>
+  <g fill="#34495B" font-family="Arial, Helvetica, sans-serif">
+    <text x="78" y="32" font-size="20" font-weight="700">Ernst-Abbe-Hochschule Jena</text>
+    <text x="78" y="54" font-size="13" font-weight="500" letter-spacing="0.04em">University of Applied Sciences</text>
+  </g>
+</svg>

@@ -3,21 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Campus-Kompass EAH – Virtuelle Uni-Tour</title>
-  <meta name="description" content="Lauf im Browser durch den WI-Bereich der EAH Jena und frag den Wegweiser nach jedem Raum.">
+  <title>Campus-Kompass · EAH Jena</title>
+  <meta name="description" content="Virtuelle Tour durch den WI-Bereich der Ernst-Abbe-Hochschule Jena. Finde Räume im Browser – mit 3D und Wegweiser.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Kopfzeile: Logo links, Sprachwechsel rechts -->
-  <header class="kopfzeile">
+  <header class="kopfzeile kopfzeile--transparent">
     <div class="container kopfzeile__inhalt">
-      <a href="index.html" class="logo">
-        <!-- Platzhalter-Zeichen, Logo-Bezug noch mit Prof. Stepping klären -->
-        <svg class="logo__zeichen" viewBox="0 0 28 24" aria-hidden="true">
-          <path d="M14 0 28 24H0Z" fill="currentColor"/>
-        </svg>
-        <span>Campus-Kompass EAH</span>
+      <a href="index.html" class="logo" aria-label="Campus-Kompass Startseite">
+        <img class="logo__eah" src="assets/logo/eah-logo-weiss.svg" alt="Ernst-Abbe-Hochschule Jena" width="210" height="36">
+        <span class="logo__trenner" aria-hidden="true"></span>
+        <span class="logo__produkt">Campus-Kompass</span>
       </a>
       <a href="#" class="sprache" lang="en" aria-label="Switch to English">EN</a>
     </div>
@@ -25,78 +25,87 @@
 
   <main>
 
-    <!-- Hero: Überschrift, kurzer Text, zwei Buttons, Vorschaubild -->
-    <section class="hero">
-      <div class="container hero__raster">
-        <div class="hero__text">
-          <p class="label">EAH Jena · Wirtschaftsingenieurwesen</p>
-          <h1>Dein Weg durch die EAH, schon vor dem ersten Tag.</h1>
-          <p class="hero__unterzeile">Lauf im Browser durch den WI-Bereich und frag den Wegweiser nach jedem Raum.</p>
-          <div class="knopfreihe">
-            <a href="laden.html" class="knopf knopf--primaer">Tour starten</a>
-            <a href="#so-gehts" class="knopf knopf--sekundaer">So funktioniert's</a>
-          </div>
-        </div>
-        <div class="hero__bild platzhalter">
-          <p>Bild / Vorschau der Tour<br>(eigenes Foto, kein Lageplan)</p>
+    <section class="hero-bleed">
+      <img class="hero-bleed__bild" src="assets/img/campus-wi.jpg" alt="Studierende an der Ernst-Abbe-Hochschule Jena">
+      <div class="hero-bleed__schatten" aria-hidden="true"></div>
+      <div class="container hero-bleed__inhalt">
+        <p class="hero-bleed__marke">EAH Jena · Campus-Kompass</p>
+        <h1>Finde deinen Weg durch die Hochschule.</h1>
+        <p class="hero-bleed__text">Begehbare 3D-Tour durch den WI-Bereich – mit Wegweiser, der Räume kennt und Routen zeigt.</p>
+        <div class="knopfreihe">
+          <a href="laden.html" class="knopf knopf--hell">Tour starten</a>
+          <a href="#so-gehts" class="knopf knopf--glas">So funktioniert's</a>
         </div>
       </div>
     </section>
 
-    <!-- So funktioniert's: drei Schritte als nummerierte Liste -->
     <section id="so-gehts" class="abschnitt">
       <div class="container">
-        <h2>So funktioniert's</h2>
+        <p class="label">In drei Schritten</p>
+        <h2>Vom Browser direkt zum Raum.</h2>
         <ol class="schritte">
-          <li class="karte schritt">
-            <span class="schritt__nr" aria-hidden="true">1</span>
-            <div>
-              <h3>Tour öffnen</h3>
-              <p>Die 3D-Umgebung lädt direkt im Browser, ohne App.</p>
-            </div>
+          <li class="schritt">
+            <span class="schritt__nr" aria-hidden="true">01</span>
+            <h3>Tour öffnen</h3>
+            <p>Die 3D-Umgebung läuft im Browser. Keine App, kein Download.</p>
           </li>
-          <li class="karte schritt">
-            <span class="schritt__nr" aria-hidden="true">2</span>
-            <div>
-              <h3>Frage stellen</h3>
-              <p>Schreib dem Avatar, wohin du willst.</p>
-            </div>
+          <li class="schritt">
+            <span class="schritt__nr" aria-hidden="true">02</span>
+            <h3>Standort &amp; Frage</h3>
+            <p>Wähle, wo du stehst, und frag den Wegweiser nach dem Ziel.</p>
           </li>
-          <li class="karte schritt">
-            <span class="schritt__nr" aria-hidden="true">3</span>
-            <div>
-              <h3>Route folgen</h3>
-              <p>Der Weg wird dir in der 3D-Ansicht angezeigt.</p>
-            </div>
+          <li class="schritt">
+            <span class="schritt__nr" aria-hidden="true">03</span>
+            <h3>Route folgen</h3>
+            <p>Der Weg erscheint in der 3D-Ansicht – gelb markiert, klar lesbar.</p>
           </li>
         </ol>
       </div>
     </section>
 
-    <!-- Beispielfragen als Chips -->
-    <section class="abschnitt abschnitt--grau">
-      <div class="container">
-        <h2>Probier zum Beispiel</h2>
-        <ul class="chips">
-          <li><a href="tour.html" class="chip">Wo ist Raum 3.3.42?</a></li>
-          <li><a href="tour.html" class="chip">Wo ist das Sekretariat?</a></li>
-          <li><a href="tour.html" class="chip">Wo sind die Toiletten?</a></li>
-          <li><a href="tour.html" class="chip">Gibt es einen Aufzug?</a></li>
-        </ul>
+    <section class="abschnitt abschnitt--foto">
+      <div class="container abschnitt-foto__raster">
+        <div>
+          <p class="label">Für Erstis und Gäste</p>
+          <h2>Schon vor dem ersten Tag Orientierung.</h2>
+          <p class="abschnitt-foto__text">Hörsäle, Sekretariat, Aufzüge, Toiletten – der Wegweiser versteht Raumnummern und gebräuchliche Namen.</p>
+          <ul class="chips">
+            <li><a href="tour.html?frage=Wo%20ist%20Raum%203.3.42%3F" class="chip">Wo ist Raum 3.3.42?</a></li>
+            <li><a href="tour.html?frage=Wo%20ist%20das%20Sekretariat%3F" class="chip">Wo ist das Sekretariat?</a></li>
+            <li><a href="tour.html?frage=Wo%20sind%20die%20Toiletten%3F" class="chip">Wo sind die Toiletten?</a></li>
+            <li><a href="tour.html?frage=Gibt%20es%20einen%20Aufzug%3F" class="chip">Gibt es einen Aufzug?</a></li>
+          </ul>
+        </div>
+        <figure class="foto-rahmen">
+          <img src="assets/img/hero-campus.jpg" alt="Campusleben an der EAH Jena" width="640" height="420" loading="lazy">
+        </figure>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt--dunkel cta-band">
+      <div class="container cta-band__inhalt">
+        <div>
+          <h2>Bereit für den Campus?</h2>
+          <p>Starte die virtuelle Tour und teste den Wegweiser.</p>
+        </div>
+        <a href="laden.html" class="knopf knopf--hell">Tour jetzt starten</a>
       </div>
     </section>
 
   </main>
 
-  <!-- Fußzeile -->
   <footer class="fusszeile">
     <div class="container fusszeile__inhalt">
-      <p>Studentisches Projekt · TWP WS 2026/27 · EAH Jena</p>
+      <div class="fusszeile__marke">
+        <img src="assets/logo/eah-mark.svg" alt="" width="28" height="28">
+        <p>Studentisches Projekt · TWP WS 2026/27<br>Ernst-Abbe-Hochschule Jena</p>
+      </div>
       <nav class="fusszeile__links" aria-label="Rechtliches">
-        <a href="#">Credits</a>
+        <a href="#credits">Credits</a>
         <a href="#">Impressum &amp; Datenschutz</a>
       </nav>
     </div>
+    <p id="credits" class="container fusszeile__credits">Bilder: eah-jena.de · Logo-Markenzeichen im EAH-Farbton · Campus-Kompass ist ein Lehrprojekt.</p>
   </footer>
 
 </body>
