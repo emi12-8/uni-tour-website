@@ -102,6 +102,78 @@
     verlauf.scrollTop = verlauf.scrollHeight;
   }
 
+  /* „Wegweiser tippt …“: drei hüpfende Punkte, solange n8n rechnet */
+  function tipptAnzeigen() {
+    var punkt = document.createElement("li");
+    punkt.className = "nachricht nachricht--bot nachricht--tippt";
+    punkt.innerHTML = '<span class="nur-screenreader">Wegweiser tippt …</span>' +
+      '<span class="tippt__punkt" aria-hidden="true"></span>' +
+      '<span class="tippt__punkt" aria-hidden="true"></span>' +
+      '<span class="tippt__punkt" aria-hidden="true"></span>';
+    verlauf.appendChild(punkt);
+    verlauf.scrollTop = verlauf.scrollHeight;
+    return punkt;
+  }
+
+  /* Icons für die Wegschritte (24×24, Linienstärke wie im Styleguide) */
+  var SCHRITT_ICONS = {
+    verlassen: '<path d="M6 21V4a1 1 0 0 1 1-1h8v18M3 21h18M12 12h.01"/>',
+    gehen: '<path d="M12 20V5M6 11l6-6 6 6"/>',
+    rechts: '<path d="M7 20v-7a4 4 0 0 1 4-4h8M15 5l4 4-4 4"/>',
+    links: '<path d="M17 20v-7a4 4 0 0 0-4-4H5M9 5 5 9l4 4"/>',
+    fahrstuhl: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 10l3-3 3 3M9 14l3 3 3-3"/>',
+    treppe: '<path d="M4 20h4v-4h4v-4h4V8h4"/>',
+    ziel: '<path d="M12 21s-6-5.6-6-11a6 6 0 0 1 12 0c0 5.4-6 11-6 11z"/><circle cx="12" cy="10" r="2"/>'
+  };
+
+  function schrittIcon(schritt) {
+    var art = schritt.aktion;
+    if (art === "etage") art = schritt.mittel === "treppe" ? "treppe" : "fahrstuhl";
+    var pfad = SCHRITT_ICONS[art] || SCHRITT_ICONS.gehen;
+    return '<svg viewBox="0 0 24 24" aria-hidden="true">' + pfad + '</svg>';
+  }
+
+  function textSicher(text) {
+    var hilfe = document.createElement("span");
+    hilfe.textContent = text == null ? "" : String(text);
+    return hilfe.innerHTML;
+  }
+
+  function hausEtage(ort) {
+    if (!ort) return "";
+    var teile = [];
+    if (ort.haus != null) teile.push("Haus " + parseInt(ort.haus, 10));
+    if (ort.etage != null) teile.push("Etage " + ort.etage);
+    return teile.join(", ");
+  }
+
+  /* Antwort als übersichtliche Schrittliste statt als Textblock */
+  function routeNachricht(daten) {
+    var ziel = daten.ziel || {};
+    var meta = [];
+    if (daten.gesamt_m != null) meta.push(Math.round(daten.gesamt_m) + " m");
+    if (hausEtage(ziel)) meta.push(hausEtage(ziel));
+
+    var html = '<p class="route-antwort__kopf">Zu <strong>' + textSicher(ziel.name || ziel.id || "deinem Ziel") + '</strong></p>';
+    if (meta.length) html += '<p class="route-antwort__meta">' + textSicher(meta.join(" · ")) + '</p>';
+    html += '<ol class="weg-schritte">';
+    daten.schritte.forEach(function (schritt) {
+      var art = schritt.aktion === "etage" ? "etage" : schritt.aktion;
+      html += '<li class="weg-schritt weg-schritt--' + textSicher(art) + '">' +
+        '<span class="weg-schritt__icon">' + schrittIcon(schritt) + '</span>' +
+        '<span class="weg-schritt__text">' + textSicher(schritt.text) + '</span></li>';
+    });
+    html += '</ol>';
+    html += '<p class="route-antwort__tipp">Folge der türkisen Linie in der 3D-Ansicht.</p>';
+
+    var punkt = document.createElement("li");
+    punkt.className = "nachricht nachricht--bot nachricht--route";
+    punkt.innerHTML = html;
+    verlauf.appendChild(punkt);
+    // Zum Anfang der Antwort scrollen, damit man den ersten Schritt sieht
+    verlauf.scrollTop = punkt.offsetTop - verlauf.offsetTop - 8;
+  }
+
   /* Demo: unbekannte Ziele als rote Fehlerblase zeigen */
   function fehlerZuFrage(frage) {
     var text = norm(frage).replace(/[?!.,]+$/g, "");
@@ -147,13 +219,19 @@
 
   function zeigeRoute(daten) {
     var text = daten.antwort || daten.text || "";
-    if (text) nachricht(text, "bot");
+    if (Array.isArray(daten.schritte) && daten.schritte.length) {
+      routeNachricht(daten);
+    } else if (text) {
+      nachricht(text, "bot");
+    }
     var zielName = daten.ziel && (daten.ziel.name || daten.ziel.id);
     routeLeiste.hidden = false;
     routeZiel.textContent = zielName ? "Route zu " + zielName : "Route";
     var teile = [];
-    if (daten.gesamt_m != null) teile.push(daten.gesamt_m + " m");
-    if (daten.start_quelle) teile.push("Start: " + daten.start_quelle);
+    if (daten.gesamt_m != null) teile.push(Math.round(daten.gesamt_m) + " m");
+    // Start lesbar anzeigen: Avatar-Position oder Name des Startraums
+    var startName = daten.start && (daten.start.name || daten.start.id);
+    if (startName) teile.push("Start: " + startName);
     routeInfo.textContent = teile.join(" · ");
     if (window.CampusUnity) window.CampusUnity.zeigeRoute(daten.route);
   }
@@ -163,8 +241,11 @@
     var config = window.CAMPUS_CONFIG || {};
     window.CampusTour.letzterPayload = payload;
 
-    var fehler = fehlerZuFrage(frage);
+    // Die Demo-Prüfung kennt nur die Beispielräume. Sobald der Chatbot
+    // angebunden ist, entscheidet n8n selbst, ob es den Raum gibt.
+    var fehler = config.webhookUrl ? null : fehlerZuFrage(frage);
     if (fehler) {
+      if (window.CampusTri) window.CampusTri.zeige("fehler", 5000);
       nachricht(fehler, "fehler");
       return Promise.resolve({ ok: false, status: "fehler", antwort: fehler });
     }
@@ -174,22 +255,32 @@
       nachricht("Start: " + startText + ". Die Wegberechnung wird angebunden, sobald der Chatbot verbunden ist.", "bot");
       return Promise.resolve(payload);
     }
+    var tippt = tipptAnzeigen();
+    if (window.CampusTri) window.CampusTri.zeige("denken");
     return fetch(config.webhookUrl, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
     }).then(function (antwort) {
+      console.log("Chatbot-Antwort: HTTP", antwort.status);
       return antwort.json();
     }).then(function (daten) {
+      tippt.remove();
       if (daten && (daten.status === "fehler" || daten.ok === false)) {
+        if (window.CampusTri) window.CampusTri.zeige("fehler", 5000);
         nachricht(daten.antwort || daten.text || "Dieser Ort wurde nicht gefunden.", "fehler");
         window.CampusTour.letzteAntwort = daten;
         return daten;
       }
       zeigeRoute(daten);
+      if (window.CampusTri) window.CampusTri.zeige("froh", 4000);
       window.CampusTour.letzteAntwort = daten;
       return daten;
-    }).catch(function () {
+    }).catch(function (grund) {
+      // Genaue Ursache für die Fehlersuche in der Konsole ausgeben
+      console.error("Chatbot-Anfrage fehlgeschlagen:", grund);
+      tippt.remove();
+      if (window.CampusTri) window.CampusTri.zeige("fehler", 5000);
       nachricht("Die Anfrage an den Chatbot hat nicht geklappt. Bitte später noch einmal versuchen.", "fehler");
     });
   }

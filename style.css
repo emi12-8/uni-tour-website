@@ -3,6 +3,14 @@
    Farben angelehnt an EAH Corporate Design / Brandfetch
    ========================================================= */
 
+/* ---------- Schriften (lokal, keine Verbindung zu Google) ---------- */
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 400; font-display: swap; src: url("assets/fonts/manrope-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 500; font-display: swap; src: url("assets/fonts/manrope-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 600; font-display: swap; src: url("assets/fonts/manrope-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Manrope"; font-style: normal; font-weight: 700; font-display: swap; src: url("assets/fonts/manrope-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-style: normal; font-weight: 600; font-display: swap; src: url("assets/fonts/fraunces-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Fraunces"; font-style: normal; font-weight: 700; font-display: swap; src: url("assets/fonts/fraunces-latin-700-normal.woff2") format("woff2"); }
+
 :root {
   --c-primary: #009999;
   --c-primary-dark: #007a7a;
@@ -667,6 +675,7 @@ button.chip { font-family: inherit; }
 }
 
 .nachricht--bot {
+  white-space: pre-line; /* Zeilenumbrüche aus der Chatbot-Antwort anzeigen */
   align-self: flex-start;
   background: var(--c-bg-grey);
   border-bottom-left-radius: var(--r-klein);
@@ -838,28 +847,347 @@ button.chip { font-family: inherit; }
 }
 
 .unity-laden {
-  position: relative;
-  z-index: 1;
+  /* Ladebildschirm liegt über der ganzen 3D-Fläche, bis Unity fertig ist */
+  position: absolute;
+  inset: 0;
+  z-index: 4;
   display: grid;
-  justify-items: center;
-  gap: var(--s-2);
-  text-align: center;
-  padding: var(--s-4);
+  place-items: center;
+  overflow: auto;
+  color: var(--c-ink);
+  background:
+    radial-gradient(circle at 20% 20%, rgba(0, 153, 153, 0.18), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(247, 187, 61, 0.16), transparent 40%),
+    var(--c-bg-mint);
 }
 
 .unity-laden[hidden] { display: none; }
 
-.unity-laden__balken {
-  width: min(240px, 70vw);
-  height: 8px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.25);
-  overflow: hidden;
+.unity-laden .laden {
+  padding: var(--s-5);
+  gap: var(--s-3);
 }
 
-#unity-balken {
-  width: 0;
-  height: 100%;
+/* Echter Fortschritt statt Animation */
+.ladebalken__fuellung--echt {
+  animation: none;
+  transition: width 0.3s ease-out;
+}
+
+.ladebalken[hidden],
+.laden__unter[hidden] { display: none; }
+
+/* Wenig Platz (Handy): kleiner Avatar, kein Tipp */
+@media (max-height: 520px), (max-width: 899px) {
+  .unity-laden .avatar--gross { width: 64px; height: 64px; }
+  .unity-laden .avatar--gross svg { width: 42px; height: 42px; }
+  .unity-laden .laden__titel { font-size: 1.25rem; }
+  .unity-laden .laden__tipp { display: none; }
+}
+
+/* ---------- Rechtliches (Impressum, Datenschutz) ---------- */
+.rechtliches {
+  padding-block: var(--s-7) var(--s-8);
+}
+
+.rechtliches__text {
+  max-width: 46rem;
+}
+
+.rechtliches h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin-bottom: var(--s-5);
+}
+
+.rechtliches h2 {
+  font-size: 1.3rem;
+  margin: var(--s-7) 0 var(--s-3);
+}
+
+.rechtliches h3 {
+  font-size: 1rem;
+  margin: var(--s-5) 0 var(--s-2);
+}
+
+.rechtliches p,
+.rechtliches ul {
+  margin: 0 0 var(--s-4);
+  line-height: 1.65;
+}
+
+.rechtliches ul { padding-left: var(--s-5); }
+
+.rechtliches a { color: var(--c-primary-dark); }
+
+.rechtliches__hinweis {
+  padding: var(--s-4) var(--s-5);
+  border-radius: var(--r-mittel);
+  background: var(--c-bg-mint);
+}
+
+.rechtliches__karte {
+  padding: var(--s-5);
+  border: 1px solid var(--c-line);
+  border-radius: var(--r-mittel);
+  background: var(--c-bg-grey);
+}
+
+.rechtliches__karte p:last-child { margin-bottom: 0; }
+
+.rechtliches__stand {
+  margin-top: var(--s-7);
+  font-size: 0.85rem;
+  color: var(--c-ink-soft);
+}
+
+.chat__rechtliches {
+  margin: var(--s-2) 0 0;
+  font-size: 0.75rem;
+  color: var(--c-ink-soft);
+}
+
+.chat__rechtliches a { color: inherit; }
+
+
+/* ---------- Steuerungs-Hinweis über der 3D-Ansicht ---------- */
+.steuerung {
+  position: absolute;
+  left: var(--s-4);
+  bottom: var(--s-4);
+  z-index: 3;
+  width: min(320px, calc(100% - 2 * var(--s-4)));
+  padding: var(--s-4) var(--s-5) var(--s-5);
+  border-radius: var(--r-mittel);
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 8px 24px rgba(27, 42, 54, 0.18);
+  color: var(--c-ink);
+}
+
+.steuerung[hidden] { display: none; }
+
+.steuerung__titel {
+  margin-bottom: var(--s-3);
+  font-weight: 700;
+}
+
+.steuerung__liste {
+  display: grid;
+  gap: var(--s-3);
+  margin: 0 0 var(--s-4);
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.steuerung__liste li {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: var(--s-3);
+  align-items: center;
+}
+
+.steuerung__tasten {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-1);
+}
+
+.steuerung kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 24px;
+  height: 24px;
+  padding: 0 var(--s-1);
+  border: 1px solid var(--c-line);
+  border-bottom-width: 2px;
+  border-radius: 6px;
+  background: var(--c-bg-grey);
+  font: 700 0.75rem/1 var(--font);
+  color: var(--c-ink);
+}
+
+.steuerung__pfeile {
+  display: grid;
+  grid-template-columns: repeat(3, 24px);
+  gap: 2px;
+}
+
+.steuerung__pfeile .pfeil-hoch { grid-column: 2; }
+.steuerung__pfeile kbd:not(.pfeil-hoch) { grid-row: 2; }
+
+.steuerung__maus {
+  width: 16px;
+  height: 24px;
+  color: var(--c-ink);
+}
+
+.steuerung-hilfe {
+  position: absolute;
+  left: var(--s-4);
+  bottom: var(--s-4);
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--r-rund);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 12px rgba(27, 42, 54, 0.18);
+  color: var(--c-ink);
+  font: 700 1rem/1 var(--font);
+  cursor: pointer;
+}
+
+.steuerung-hilfe[hidden] { display: none; }
+
+/* Am Handy erst, wenn die Touch-Steuerung da ist */
+@media (hover: none) and (pointer: coarse) {
+  .steuerung,
+  .steuerung-hilfe { display: none !important; }
+}
+
+
+/* ---------- Chat: „Wegweiser tippt …“ ---------- */
+.nachricht--tippt {
+  display: inline-flex;
+  gap: 5px;
+  padding: var(--s-3) var(--s-4);
+}
+
+.tippt__punkt {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c-ink-soft);
+  opacity: 0.4;
+  animation: tippen 1.2s ease-in-out infinite;
+}
+
+.tippt__punkt:nth-child(3) { animation-delay: 0.15s; }
+.tippt__punkt:nth-child(4) { animation-delay: 0.3s; }
+
+@keyframes tippen {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+
+/* ---------- Chat: Antwort als Schrittliste ---------- */
+.nachricht--route {
+  white-space: normal;
+  max-width: 92%;
+  padding: var(--s-3) var(--s-4) var(--s-4);
+}
+
+.route-antwort__kopf { line-height: 1.35; }
+
+.route-antwort__meta {
+  margin-top: 2px;
+  font-size: 0.8rem;
+  color: var(--c-ink-soft);
+}
+
+.weg-schritte {
+  display: grid;
+  gap: var(--s-2);
+  margin: var(--s-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.weg-schritt {
+  display: grid;
+  grid-template-columns: 28px 1fr;
+  gap: var(--s-3);
+  align-items: center;
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.weg-schritt__icon {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
   background: #fff;
-  transition: width 0.2s;
+  color: var(--c-primary-dark);
+}
+
+.weg-schritt__icon svg {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.weg-schritt--etage .weg-schritt__icon {
+  background: var(--c-accent);
+  color: var(--c-nacht);
+}
+
+.weg-schritt--etage .weg-schritt__text { font-weight: 700; }
+
+.weg-schritt--ziel .weg-schritt__icon {
+  background: #E85D75;
+  color: #fff;
+}
+
+.weg-schritt--ziel .weg-schritt__text { font-weight: 700; }
+
+.route-antwort__tipp {
+  margin-top: var(--s-3);
+  font-size: 0.8rem;
+  color: var(--c-ink-soft);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tippt__punkt { animation: none; opacity: 0.7; }
+}
+
+
+/* ---------- Tri-Ausdrücke im Chat-Kopf ---------- */
+.avatar--chat svg {
+  width: 36px;
+  height: 36px;
+  overflow: visible;
+}
+
+.tri__arm { fill: none; stroke: #0E8A8A; stroke-width: 5; stroke-linecap: round; }
+.tri__hand { fill: #0E8A8A; }
+.tri__fuss { fill: #118c8c; }
+.tri__lid { fill: var(--c-avatar); }
+.tri__strich { fill: none; stroke: var(--c-nacht); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.tri__mund-voll { fill: var(--c-nacht); }
+.tri__frage { font: 800 30px var(--font); fill: var(--c-primary); }
+
+.avatar--chat svg g,
+.avatar--chat svg text { transform-box: fill-box; transform-origin: center bottom; }
+
+.tri--huepf { animation: tri-huepf 1.1s ease-in-out 3; }
+.tri--sinken { animation: tri-sinken 2.4s ease-in-out infinite; }
+.avatar--chat[data-ausdruck="denken"] .tri__frage { animation: tri-frage 1.6s ease-in-out infinite; }
+
+@keyframes tri-huepf {
+  0%, 100% { transform: translateY(0) scale(1, 1); }
+  15% { transform: translateY(2px) scale(1.06, 0.94); }
+  45% { transform: translateY(-12px) scale(0.97, 1.03); }
+  85% { transform: translateY(0) scale(1.04, 0.96); }
+}
+
+@keyframes tri-sinken {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+@keyframes tri-frage {
+  0%, 100% { opacity: 0.2; transform: translateY(4px); }
+  40%, 80% { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tri--huepf, .tri--sinken, .avatar--chat .tri__frage { animation: none !important; }
 }

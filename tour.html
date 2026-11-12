@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Tour · Campus-Kompass EAH</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="tourseite">
@@ -33,23 +30,48 @@
 
       <canvas id="unity-canvas" class="unity-canvas" tabindex="-1" aria-label="3D-Ansicht des Campus"></canvas>
 
-<div class="unity-laden" id="unity-laden">
-  <p>3D-Ansicht wird geladen …</p>
-  <div class="unity-laden__balken"><div id="unity-balken"></div></div>
-</div>
+      <!-- Ladebildschirm: Design der früheren laden.html, jetzt mit echtem Fortschritt -->
+      <div class="unity-laden" id="unity-laden">
+        <div class="laden">
+          <div class="avatar avatar--gross avatar--wippt" aria-hidden="true">
+            <svg viewBox="0 0 100 100">
+              <ellipse class="tri__fuss" cx="38" cy="88" rx="6" ry="5"/>
+              <ellipse class="tri__fuss" cx="62" cy="88" rx="6" ry="5"/>
+              <path class="tri__koerper" d="M50 10 Q55 10 58 16 L89 74 Q93 82 84 82 H16 Q7 82 11 74 L42 16 Q45 10 50 10Z"/>
+              <circle class="tri__auge" cx="40" cy="55" r="6"/>
+              <circle class="tri__auge" cx="60" cy="55" r="6"/>
+              <circle class="tri__pupille" cx="41" cy="56" r="3"/>
+              <circle class="tri__pupille" cx="61" cy="56" r="3"/>
+              <ellipse class="tri__wange" cx="32" cy="66" rx="4" ry="2.5"/>
+              <ellipse class="tri__wange" cx="68" cy="66" rx="4" ry="2.5"/>
+              <path class="tri__mund" d="M44 66 Q50 72 56 66"/>
+            </svg>
+          </div>
+          <h1 class="laden__titel" id="unity-laden-titel">Die Tour wird geladen …</h1>
+          <p class="laden__unter" id="unity-laden-unter">WI-Bereich · 3D-Ansicht · Wegweiser</p>
+          <div class="ladebalken" id="unity-ladebalken" role="progressbar" aria-label="Ladefortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div class="ladebalken__fuellung ladebalken__fuellung--echt" id="unity-balken"></div>
+          </div>
+          <p class="laden__tipp">Tipp: Raumnummern wie 3.3.42 versteht der Wegweiser direkt.</p>
+        </div>
+      </div>
+
+      <!-- Steuerungs-Hinweis (nur Desktop, erscheint nach dem Laden) -->
+      <div class="steuerung" id="steuerung" role="note" aria-labelledby="steuerung-titel" hidden>
+        <p class="steuerung__titel" id="steuerung-titel">So bewegst du dich</p>
+        <ul class="steuerung__liste">
+          <li><span class="steuerung__tasten"><kbd>W</kbd></span> nach vorne laufen</li>
+          <li><span class="steuerung__tasten steuerung__pfeile"><kbd class="pfeil-hoch">↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd></span> mit den Pfeiltasten laufen</li>
+          <li><span class="steuerung__tasten"><svg class="steuerung__maus" viewBox="0 0 16 24" aria-hidden="true"><rect x="1" y="1" width="14" height="22" rx="7" fill="none" stroke="currentColor" stroke-width="2"/><line x1="8" y1="5" x2="8" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span> Maustaste gedrückt halten und ziehen, um dich umzuschauen</li>
+        </ul>
+        <button type="button" class="knopf knopf--primaer knopf--klein" id="steuerung-ok">Alles klar</button>
+      </div>
+      <button type="button" class="steuerung-hilfe" id="steuerung-hilfe" aria-label="Steuerung anzeigen" aria-controls="steuerung" hidden>?</button>
     </section>
 
     <aside class="chat" aria-label="Chat mit dem Wegweiser">
       <div class="chat__kopf">
-        <div class="avatar avatar--klein">
-          <svg viewBox="0 0 100 100" aria-hidden="true">
-            <path class="tri__koerper" d="M50 10 Q55 10 58 16 L89 74 Q93 82 84 82 H16 Q7 82 11 74 L42 16 Q45 10 50 10Z"/>
-            <circle class="tri__auge" cx="40" cy="55" r="7"/>
-            <circle class="tri__auge" cx="60" cy="55" r="7"/>
-            <circle class="tri__pupille" cx="41" cy="56" r="3.5"/>
-            <circle class="tri__pupille" cx="61" cy="56" r="3.5"/>
-          </svg>
-        </div>
+        <div class="avatar avatar--klein avatar--chat" id="tri-avatar" data-ausdruck="neutral"></div>
         <div>
           <p class="chat__name">Wegweiser</p>
           <p class="chat__status">online · EAH Jena</p>
@@ -60,11 +82,6 @@
         <li class="nachricht nachricht--bot">Hallo! Wohin möchtest du?</li>
       </ol>
 
-      <ul class="chips chips--scroll" aria-label="Vorschläge">
-        <li><button type="button" class="chip" data-frage="Wo ist das Sekretariat?">Wo ist das Sekretariat?</button></li>
-        <li><button type="button" class="chip" data-frage="Gibt es einen Aufzug?">Gibt es einen Aufzug?</button></li>
-        <li><button type="button" class="chip" data-frage="Wo ist die nächste Toilette?">Wo ist die nächste Toilette?</button></li>
-      </ul>
 
       <form class="chat__eingabe" id="chat-form" action="#">
         <div class="startwahl">
@@ -79,12 +96,14 @@
           <button type="submit" class="knopf knopf--primaer">Senden</button>
         </div>
       </form>
+      <p class="chat__rechtliches">Deine Fragen werden an unseren KI-Wegweiser gesendet. Bitte keine persönlichen Daten eingeben. · <a href="datenschutz.html">Datenschutz</a> · <a href="impressum.html">Impressum</a></p>
     </aside>
 
   </main>
 
   <script src="js/config.js?v=2"></script>
   <script src="js/startpunkte.js?v=2"></script>
+  <script src="js/tri.js"></script>
   <script src="js/tour.js?v=2"></script>
   <script src="unity/Build/Unity_WebBuild.loader.js"></script>
   <script src="js/unity.js"></script>

@@ -1,0 +1,755 @@
+{
+ "hinweis": "Startpunkte für das Dropdown, ohne Koordinaten. Quelle: graph.json des Chatbot-Teams.",
+ "knoten": [
+  {
+   "id": "03.03.25",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.23",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.26",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.21",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.33/1",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.20",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.19",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.18",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.17",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.33/2",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.16",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.15",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.34",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.14",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.13",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.38",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.39",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.12/2",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.40",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.41",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.11",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.42/1",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.10",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.42/2",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.01",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.Toilette2",
+   "typ": "toilette",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.Aufzug1",
+   "typ": "fahrstuhl",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.24",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.22",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.Toilette1",
+   "typ": "toilette",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.12/1",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.03.Aufzug2",
+   "typ": "fahrstuhl",
+   "haus": "03",
+   "etage": 3
+  },
+  {
+   "id": "03.02.Toilette2",
+   "typ": "toilette",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.Aufzug1",
+   "typ": "fahrstuhl",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.Toilette1",
+   "typ": "toilette",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.Aufzug2",
+   "typ": "fahrstuhl",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.22",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.23",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.21",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.20",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.19",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.17",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.18",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.31",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.32",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.33",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.16",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.15",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.14",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.37",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.13",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.38",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.39",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.12",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.40",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.41",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.11",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.10",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.08",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.42",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.43",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.44",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.45",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.46",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.47",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.01",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.02",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.30",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.02.09",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 2
+  },
+  {
+   "id": "03.00.25",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.21",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.20",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.19",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.13",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.16",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.15",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.44",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.Aufzug1/1",
+   "typ": "fahrstuhl",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.Toilette1",
+   "typ": "toilette",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.17",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.Aufzug2",
+   "typ": "fahrstuhl",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.14",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.24",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.22",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.23",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.32",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.33",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.34",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.35",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.43",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.42",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.41",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.40",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.39",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.45",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.01",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.02",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.Toilette2",
+   "typ": "toilette",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.Eingang4",
+   "typ": "eingang",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.Sporthalle",
+   "typ": "raum",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.Eingang3",
+   "typ": "eingang",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "02.03.05",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 3
+  },
+  {
+   "id": "02.03.06",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 3
+  },
+  {
+   "id": "02.03.07",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 3
+  },
+  {
+   "id": "02.03.Aufzug1",
+   "typ": "fahrstuhl",
+   "haus": "02",
+   "etage": 3
+  },
+  {
+   "id": "02.03.08",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 3
+  },
+  {
+   "id": "02.03.01",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 3
+  },
+  {
+   "id": "02.03.02",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 3
+  },
+  {
+   "id": "02.03.03/2",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 3
+  },
+  {
+   "id": "02.03.04",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 3
+  },
+  {
+   "id": "02.03.03/1",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 3
+  },
+  {
+   "id": "03.00.Aufzug1/2",
+   "typ": "fahrstuhl",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.Eingang2",
+   "typ": "eingang",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "03.00.Eingang1",
+   "typ": "eingang",
+   "haus": "03",
+   "etage": 0
+  },
+  {
+   "id": "02.02.05",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 2
+  },
+  {
+   "id": "02.02.06/1",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 2
+  },
+  {
+   "id": "02.02.06/2",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 2
+  },
+  {
+   "id": "02.02.Aufzug1",
+   "typ": "fahrstuhl",
+   "haus": "02",
+   "etage": 2
+  },
+  {
+   "id": "02.02.01/2",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 2
+  },
+  {
+   "id": "02.02.07",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 2
+  },
+  {
+   "id": "02.02.03/1",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 2
+  },
+  {
+   "id": "02.02.03/2",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 2
+  },
+  {
+   "id": "02.02.04",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 2
+  },
+  {
+   "id": "02.02.01/1",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 2
+  },
+  {
+   "id": "02.02.02",
+   "typ": "raum",
+   "haus": "02",
+   "etage": 2
+  }
+ ]
+}

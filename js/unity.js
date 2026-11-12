@@ -10,8 +10,11 @@
     var instanz = null; // wird gesetzt, sobald Unity fertig geladen ist
   
     function meldung(text) {
+      // Ladebildschirm bleibt im Design, nur Text tauschen und Balken ausblenden
       laden.hidden = false;
-      laden.innerHTML = "<p>" + text + "</p>";
+      document.getElementById("unity-laden-titel").textContent = text;
+      document.getElementById("unity-laden-unter").hidden = true;
+      document.getElementById("unity-ladebalken").hidden = true;
     }
   
     // 1. Kann der Browser überhaupt 3D (WebGL)?
@@ -43,18 +46,25 @@ function tippenErlauben(event) {
       productVersion: "0.1.0"
     }, function (fortschritt) {
       // fortschritt geht von 0 bis 1
-      balken.style.width = Math.round(fortschritt * 100) + "%";
+      var prozent = Math.round(fortschritt * 100);
+      balken.style.width = prozent + "%";
+      document.getElementById("unity-ladebalken").setAttribute("aria-valuenow", prozent);
     }).then(function (fertig) {
       instanz = fertig;
       laden.hidden = true;
+      steuerungStarten();
     }).catch(function () {
       meldung("Die 3D-Ansicht konnte nicht geladen werden. Der Chat funktioniert trotzdem.");
     });
   
     // 3. SCHRITT 4: Unity ruft diese Funktion auf, wenn sich der Avatar bewegt
     //    (über Position.jslib im Unity-Projekt).
+    //    n8n braucht auch das Haus (jedes Haus hat eigene Koordinaten).
+    //    Solange Unity das Haus nicht mitschickt, nehmen wir Haus 3,
+    //    weil das 3D-Modell bisher nur Haus 3 enthält.
+    var STANDARD_HAUS = "03";
     window.empfangePosition = function (x, y, etage, haus) {
-      window.CampusTour.setzeAvatarPosition({ x: x, y: y, etage: etage, haus: haus });
+      window.CampusTour.setzeAvatarPosition({ x: x, y: y, etage: etage, haus: haus || STANDARD_HAUS });
     };
   
     // 4. SCHRITT 8: Route an Unity geben. tour.js ruft das auf, wenn n8n geantwortet hat.
@@ -68,5 +78,32 @@ function tippenErlauben(event) {
       instanz.SendMessage("Navigation", "LoescheRoute");
     }
   
+    // 5. Steuerungs-Hinweis: erscheint beim ersten Besuch, danach über den ?-Knopf.
+    //    Ob er schon gesehen wurde, merkt sich nur dieser Browser (localStorage).
+    function steuerungStarten() {
+      var karte = document.getElementById("steuerung");
+      var ok = document.getElementById("steuerung-ok");
+      var hilfe = document.getElementById("steuerung-hilfe");
+      if (!karte || !ok || !hilfe) return;
+      var schluessel = "campus-steuerung-gesehen";
+
+      function zeigen(an) {
+        karte.hidden = !an;
+        hilfe.hidden = an;
+        hilfe.setAttribute("aria-expanded", an ? "true" : "false");
+      }
+
+      ok.addEventListener("click", function () {
+        zeigen(false);
+        try { localStorage.setItem(schluessel, "ja"); } catch (e) {}
+        canvas.focus();
+      });
+      hilfe.addEventListener("click", function () { zeigen(true); });
+
+      var gesehen = false;
+      try { gesehen = localStorage.getItem(schluessel) === "ja"; } catch (e) {}
+      zeigen(!gesehen);
+    }
+
     window.CampusUnity = { zeigeRoute: zeigeRoute, loescheRoute: loescheRoute };
   })();
