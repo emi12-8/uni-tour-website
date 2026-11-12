@@ -31,11 +31,12 @@
         <button type="button" class="knopf knopf--sekundaer knopf--klein" id="route-beenden">Beenden</button>
       </div>
 
-      <div class="tour__platzhalter">
-        <img class="tour__mini-logo" src="assets/logo/eah-mark.svg" alt="" width="36" height="36">
-        <p class="tour__platzhalter-titel">3D-Ansicht</p>
-        <p>Unity-Web-Build · Wischen zum Umsehen</p>
-      </div>
+      <canvas id="unity-canvas" class="unity-canvas" tabindex="-1" aria-label="3D-Ansicht des Campus"></canvas>
+
+<div class="unity-laden" id="unity-laden">
+  <p>3D-Ansicht wird geladen …</p>
+  <div class="unity-laden__balken"><div id="unity-balken"></div></div>
+</div>
     </section>
 
     <aside class="chat" aria-label="Chat mit dem Wegweiser">
@@ -85,5 +86,7 @@
   <script src="js/config.js?v=2"></script>
   <script src="js/startpunkte.js?v=2"></script>
   <script src="js/tour.js?v=2"></script>
+  <script src="unity/Build/Unity_WebBuild.loader.js"></script>
+  <script src="js/unity.js"></script>
 </body>
 </html>

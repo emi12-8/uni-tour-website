@@ -155,6 +155,7 @@
     if (daten.gesamt_m != null) teile.push(daten.gesamt_m + " m");
     if (daten.start_quelle) teile.push("Start: " + daten.start_quelle);
     routeInfo.textContent = teile.join(" · ");
+    if (window.CampusUnity) window.CampusUnity.zeigeRoute(daten.route);
   }
 
   function senden(frage) {
@@ -275,6 +276,7 @@
 
   document.getElementById("route-beenden").addEventListener("click", function () {
     routeLeiste.hidden = true;
+    if (window.CampusUnity) window.CampusUnity.loescheRoute();
   });
 
   var frageAusLink = new URLSearchParams(window.location.search).get("frage");

@@ -827,3 +827,39 @@ button.chip { font-family: inherit; }
   .ladebalken__fuellung { width: 100%; }
   .knopf:hover { transform: none; }
 }
+/* ---------- Unity 3D-Ansicht ---------- */
+.unity-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.unity-laden {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: var(--s-2);
+  text-align: center;
+  padding: var(--s-4);
+}
+
+.unity-laden[hidden] { display: none; }
+
+.unity-laden__balken {
+  width: min(240px, 70vw);
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  overflow: hidden;
+}
+
+#unity-balken {
+  width: 0;
+  height: 100%;
+  background: #fff;
+  transition: width 0.2s;
+}
