@@ -233,7 +233,9 @@
     var startName = daten.start && (daten.start.name || daten.start.id);
     if (startName) teile.push("Start: " + startName);
     routeInfo.textContent = teile.join(" · ");
-    if (window.CampusUnity) window.CampusUnity.zeigeRoute(daten.route);
+    // Kam der Start aus dem Dropdown, soll Unity den Avatar dorthin versetzen
+    var startAusDropdown = daten.start_quelle === "kontext_start_id";
+    if (window.CampusUnity) window.CampusUnity.zeigeRoute(daten.route, startAusDropdown);
   }
 
   function senden(frage) {

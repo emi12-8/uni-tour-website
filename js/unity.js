@@ -43,7 +43,17 @@ function tippenErlauben(event) {
       streamingAssetsUrl: "unity/StreamingAssets",
       companyName: "DefaultCompany",
       productName: "Virtuelle_Uni_Tour",
-      productVersion: "0.1.0"
+      productVersion: "0.1.0",
+      // Unity zeigt bei jedem Fehler ein Pop-up. Den Pointer-Lock-Fehler fangen wir ab:
+      // Der Browser erlaubt das Einfangen der Maus erst nach einem Klick, die Maus
+      // funktioniert also nach dem ersten Klick ins 3D-Bild ganz normal.
+      errorHandler: function (meldung) {
+        if (String(meldung).indexOf("Pointer lock") !== -1) {
+          console.warn("Pointer Lock vom Browser abgelehnt (harmlos):", meldung);
+          return true;  // true = kein Pop-up
+        }
+        return false;   // alle anderen Fehler wie bisher anzeigen
+      }
     }, function (fortschritt) {
       // fortschritt geht von 0 bis 1
       var prozent = Math.round(fortschritt * 100);
@@ -68,9 +78,11 @@ function tippenErlauben(event) {
     };
   
     // 4. SCHRITT 8: Route an Unity geben. tour.js ruft das auf, wenn n8n geantwortet hat.
-    function zeigeRoute(route) {
+    function zeigeRoute(route, setzeStart) {
       if (!instanz || !route || !route.length) return;
-      instanz.SendMessage("Navigation", "ZeigeRoute", JSON.stringify({ route: route }));
+      // setzeStart: true = Avatar auf den ersten Routenpunkt setzen (Start aus dem Dropdown).
+      // Unity ignoriert das Feld, solange Navigation.cs es noch nicht kennt.
+      instanz.SendMessage("Navigation", "ZeigeRoute", JSON.stringify({ route: route, setzeStart: !!setzeStart }));
     }
   
     function loescheRoute() {
