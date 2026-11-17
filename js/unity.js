@@ -35,6 +35,43 @@ function tippenErlauben(event) {
   window.addEventListener("keydown", tippenErlauben);
   window.addEventListener("keyup", tippenErlauben);
   window.addEventListener("keypress", tippenErlauben, true);
+
+  // Pointer-Lock erst nach einem Klick erlauben.
+  // Sonst wirft der Browser: "NotAllowedError: Pointer lock requires a user gesture"
+  // und Unity zeigt die große Fehlerbox (StarterAssets will die Maus sofort sperren).
+  function pointerLockSchuetzen(zielCanvas) {
+    var original = Element.prototype.requestPointerLock;
+    if (!original) return;
+    var erlaubt = false;
+    var warteschlange = null;
+
+    function freigeben() {
+      erlaubt = true;
+      if (warteschlange) {
+        var element = warteschlange;
+        warteschlange = null;
+        try {
+          original.call(element);
+        } catch (e) {}
+      }
+    }
+
+    zielCanvas.addEventListener("pointerdown", freigeben);
+    var okKnopf = document.getElementById("steuerung-ok");
+    if (okKnopf) okKnopf.addEventListener("click", freigeben);
+
+    Element.prototype.requestPointerLock = function () {
+      if (this === zielCanvas) {
+        if (!erlaubt) {
+          warteschlange = this;
+          return; // kein Browser-Aufruf → kein NotAllowedError
+        }
+      }
+      return original.apply(this, arguments);
+    };
+  }
+  pointerLockSchuetzen(canvas);
+
     // 2. Unity-Build laden (Pfade wie in Unitys eigener index.html, nur mit "unity/" davor)
     createUnityInstance(canvas, {
       dataUrl: "unity/Build/Unity_WebBuild.data",
