@@ -1022,6 +1022,12 @@ button.chip { font-family: inherit; }
   color: var(--c-ink);
 }
 
+.steuerung__fahrstuhl {
+  width: 24px;
+  height: 24px;
+  color: var(--c-ink);
+}
+
 .steuerung-hilfe {
   position: absolute;
   left: var(--s-4);
